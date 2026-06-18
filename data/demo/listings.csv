@@ -1,0 +1,10 @@
+listing_code,city,district,subdistrict,community_name,address_masked,lat,lon,purpose,property_type,title,description,rooms,halls,bathrooms,area_sqm,floor,total_floors,orientation,decoration,built_year,has_elevator,sale_price_total,rent_price_monthly,verification_code,verification_status,entrusted_status,listing_status,source
+SH-SALE-PD-001,上海,浦东,张江,张江汤臣豪园,张江路附近,,,sale,residential,张江核验三房近地铁,三房两厅，近张江办公区，信息以现场为准,3,2,2,112.5,中区,18,南北,精装,2008,true,7900000,,HV-PD-001,verified,active,active,internal
+SH-SALE-XH-002,上海,徐汇,徐家汇,东方曼哈顿,徐家汇核心区,,,sale,residential,徐家汇两房诚意出售,两房户型，交通便利，不承诺学区结果,2,2,1,89.2,高区,30,南,精装,2004,true,10800000,,HV-XH-002,verified,active,active,internal
+SH-RENT-JA-003,上海,静安,南京西路,静安晶华园,南京西路附近,,,rent,residential,静安一房整租可看,一房一厅，适合通勤，押金和合同以签约为准,1,1,1,58.0,中区,22,南,简装,2012,true,,9800,HV-JA-003,verified,active,active,internal
+SH-RENT-MH-004,上海,闵行,七宝,万科城市花园,七宝商圈,,,rent,residential,七宝两房整租,两房，近商业配套，房源状态待复核,2,1,1,76.5,低区,12,南,精装,2002,true,,6500,,missing,active,active,internal
+SH-SALE-MH-005,上海,闵行,莘庄,莘城公寓,莘庄地铁附近,,,sale,residential,莘庄核验两房,两房电梯房，适合自住改善,2,2,1,93.0,中区,20,南北,精装,2006,true,6200000,,HV-MH-005,verified,active,active,internal
+SH-RENT-PD-006,上海,浦东,陆家嘴,仁恒滨江园,陆家嘴滨江,,,rent,residential,陆家嘴两房高区,两房高区，江景以现场看房为准,2,2,1,102.0,高区,31,南,精装,2003,true,,18500,HV-PD-006,verified,active,active,internal
+SH-SALE-HP-007,上海,黄浦,人民广场,中福城,人民广场附近,,,sale,residential,黄浦一房待核验,一房，挂牌信息待核验,1,1,1,52.8,低区,18,南,简装,1998,true,5200000,,,missing,missing,active,internal
+SH-SALE-PT-008,上海,普陀,长寿路,长寿新村,长寿路附近,,,sale,residential,普陀核验小三房,小三房，总价友好，近轨交通,3,1,1,96.4,中区,24,南北,精装,2009,true,6800000,,HV-PT-008,verified,active,active,internal
+

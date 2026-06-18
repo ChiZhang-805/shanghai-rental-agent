@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>上海租房对话 Agent</title>
+    <link rel="stylesheet" href="/static/agent.css" />
+  </head>
+  <body>
+    <main class="workspace">
+      <section class="chat-pane">
+        <header class="topbar">
+          <h1>上海租房对话 Agent</h1>
+          <a class="map-link" href="/map">
+            <img src="/static/shanghai_rental_dialog_agent_icon_premium.png" alt="" />
+            地图
+          </a>
+        </header>
+        <div id="messages" class="messages"></div>
+        <form id="chatForm" class="composer">
+          <textarea id="prompt" rows="3" placeholder="例如：我在盛大全球研发中心上班，预算5500人民币/月，想在附近租一间一室的屋子，预计步行通勤在45分钟以内，请帮我推荐租哪里比较合适"></textarea>
+          <button id="send" type="submit">发送</button>
+        </form>
+      </section>
+      <aside class="detail-pane">
+        <section class="recommendation-panel" aria-label="推荐卡片">
+          <header class="recommendation-header">
+            <svg class="recommendation-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+              <rect x="6" y="8" width="18" height="16" rx="4" />
+              <path d="M11 13h8M11 17h6M11 21h4" />
+              <path d="M22 6l4 4-4 4" />
+              <circle cx="24" cy="22" r="3" />
+            </svg>
+            <h2>推荐卡片</h2>
+          </header>
+          <div id="results" class="results"></div>
+        </section>
+      </aside>
+    </main>
+    <script src="/static/agent.js"></script>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>上海租房地图推荐</title>
+    <link rel="stylesheet" href="/static/map.css" />
+    <script>
+      window._AMapSecurityConfig = { securityJsCode: {{ amap_js_security_code_json }} };
+      window.APP_CONFIG = { amapKey: {{ amap_js_api_key_json }} };
+    </script>
+    <script src="https://webapi.amap.com/loader.js"></script>
+  </head>
+  <body>
+    <svg class="icon-sprite" aria-hidden="true">
+      <symbol id="icon-pin" viewBox="0 0 24 24">
+        <path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z"></path>
+        <circle cx="12" cy="9" r="2.4"></circle>
+      </symbol>
+      <symbol id="icon-wallet" viewBox="0 0 24 24">
+        <path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H19v14H6.5A2.5 2.5 0 0 1 4 16.5v-9Z"></path>
+        <path d="M19 9h-5a3 3 0 0 0 0 6h5V9Z"></path>
+        <circle cx="14" cy="12" r="0.8"></circle>
+      </symbol>
+      <symbol id="icon-home" viewBox="0 0 24 24">
+        <path d="m4 11 8-7 8 7"></path>
+        <path d="M6.5 10v9H10v-5h4v5h3.5v-9"></path>
+      </symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8"></circle>
+        <path d="M12 8v4l3 2"></path>
+      </symbol>
+      <symbol id="icon-route" viewBox="0 0 24 24">
+        <circle cx="6" cy="6" r="2.5"></circle>
+        <circle cx="18" cy="18" r="2.5"></circle>
+        <path d="M8.5 6H14a4 4 0 0 1 0 8h-4a4 4 0 0 0 0 8h5.5"></path>
+      </symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="6"></circle>
+        <path d="m16 16 4 4"></path>
+      </symbol>
+      <symbol id="icon-list" viewBox="0 0 24 24">
+        <path d="M8 6h12"></path>
+        <path d="M8 12h12"></path>
+        <path d="M8 18h12"></path>
+        <circle cx="4" cy="6" r="1"></circle>
+        <circle cx="4" cy="12" r="1"></circle>
+        <circle cx="4" cy="18" r="1"></circle>
+      </symbol>
+      <symbol id="icon-chevron-left" viewBox="0 0 24 24">
+        <path d="m15 6-6 6 6 6"></path>
+      </symbol>
+      <symbol id="icon-x" viewBox="0 0 24 24">
+        <path d="M7 7l10 10"></path>
+        <path d="M17 7 7 17"></path>
+      </symbol>
+    </svg>
+    <main id="layout" class="shell">
+      <section id="sidebar" class="panel">
+        <button id="openSidebar" class="restore-button restore-sidebar" type="button" aria-label="打开筛选栏" hidden>筛选</button>
+        <div class="panel-titlebar">
+          <h1>上海租房地图推荐</h1>
+          <button id="closeSidebar" class="icon-button" type="button" title="关闭筛选栏" aria-label="关闭筛选栏">
+            <svg class="ui-icon"><use href="#icon-chevron-left"></use></svg>
+          </button>
+        </div>
+        <label><span class="field-label"><svg class="ui-icon"><use href="#icon-pin"></use></svg>工作地点</span><input id="workplace" value="张江高科" autocomplete="off" aria-describedby="workplaceStatus" /></label>
+        <div id="workplaceStatus" class="field-hint">输入工作地点 / 高德地图上点击工作地点</div>
+        <label><span class="field-label"><svg class="ui-icon"><use href="#icon-wallet"></use></svg>月租预算</span><input id="budget" type="number" value="5500" /></label>
+        <label>
+          <span class="field-label"><svg class="ui-icon"><use href="#icon-home"></use></svg>户型</span>
+          <select id="rooms">
+            <option value="1">一室</option>
+            <option value="2">两室</option>
+            <option value="3">三室</option>
+          </select>
+        </label>
+        <label><span class="field-label"><svg class="ui-icon"><use href="#icon-clock"></use></svg>最大通勤分钟</span><input id="commute" type="number" value="45" /></label>
+        <label>
+          <span class="field-label"><svg class="ui-icon"><use href="#icon-route"></use></svg>出行方式</span>
+          <select id="mode">
+            <option value="transit">公交/地铁</option>
+            <option value="bicycling">骑行</option>
+            <option value="driving">驾车</option>
+            <option value="walking">步行</option>
+          </select>
+        </label>
+        <button id="recommend"><span class="button-content"><svg class="ui-icon"><use href="#icon-search"></use></svg>推荐</span></button>
+        <p id="warning"></p>
+      </section>
+      <div id="sidebarResizer" class="sidebar-resizer" title="拖拽调整筛选栏宽度"></div>
+      <section class="map-wrap">
+        <div id="map"></div>
+        <div class="results-toolbar">
+          <span class="toolbar-title"><svg class="ui-icon"><use href="#icon-list"></use></svg>推荐候选</span>
+          <button id="closeResults" class="icon-button" type="button" title="关闭结果栏" aria-label="关闭结果栏">
+            <svg class="ui-icon"><use href="#icon-x"></use></svg>
+          </button>
+        </div>
+        <div id="resultsResizer" class="results-resizer" title="拖拽调整结果栏高度"></div>
+        <div id="cards" class="cards"></div>
+        <button id="openResults" class="restore-button restore-results" type="button" aria-label="打开结果栏" hidden>候选</button>
+      </section>
+    </main>
+    <script src="/static/map.js"></script>
+  </body>
+</html>

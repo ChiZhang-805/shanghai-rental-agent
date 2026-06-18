@@ -1,0 +1,8 @@
+external_id,source,title,city,district,subdistrict,community_name,address,lng,lat,coordinate_system,rent_monthly,deposit_months,payment_cycle,rooms,halls,bathrooms,area_sqm,floor,total_floors,orientation,decoration,has_elevator,nearby_metro_station,metro_distance_m,available_from,status,last_seen_at,listing_url,contact_name,contact_phone,is_verified,is_demo
+D001,demo,张江附近一室户样例,上海,浦东,张江,张江样例小区,上海市浦东新区张江高科附近,121.598,31.207,gcj02,5600,1,押一付三,1,1,1,38,8,18,南,精装,true,张江高科,650,2026-01-01,available,2026-01-01T00:00:00,,,,false,true
+D002,demo,漕河泾通勤样例房,上海,徐汇,漕河泾,漕河泾样例小区,上海市徐汇区漕河泾附近,121.408,31.176,gcj02,5300,1,押一付三,1,1,1,35,6,12,南,简装,true,漕河泾开发区,700,2026-01-01,available,2026-01-01T00:00:00,,,,false,true
+D003,demo,中山公园换乘样例一房,上海,长宁,中山公园,中山样例公寓,上海市长宁区中山公园附近,121.424,31.224,gcj02,6200,1,押一付三,1,1,1,42,12,25,南,精装,true,中山公园,450,2026-01-01,available,2026-01-01T00:00:00,,,,false,true
+D004,demo,静安寺周边样例开间,上海,静安,静安寺,静安样例公寓,上海市静安区静安寺附近,121.445,31.224,gcj02,6800,1,押一付三,1,0,1,32,10,20,南,精装,true,静安寺,500,2026-01-01,available,2026-01-01T00:00:00,,,,false,true
+D005,demo,莘庄预算友好样例两房,上海,闵行,莘庄,莘庄样例小区,上海市闵行区莘庄附近,121.385,31.111,gcj02,5200,1,押一付三,2,1,1,62,5,16,南北,简装,true,莘庄,800,2026-01-01,available,2026-01-01T00:00:00,,,,false,true
+D006,demo,世纪大道通勤样例一房,上海,浦东,世纪大道,世纪大道样例公寓,上海市浦东新区世纪大道附近,121.527,31.229,gcj02,6500,1,押一付三,1,1,1,40,14,28,南,精装,true,世纪大道,550,2026-01-01,available,2026-01-01T00:00:00,,,,false,true
+
