@@ -110,6 +110,62 @@ pytest
 python scripts/smoke_test.py
 ```
 
+## 部署成公网网站
+
+如果想像 `https://hotlist-app-one.vercel.app/` 一样，让老师或同学直接打开一个链接体验，推荐用 Render 或 Railway 部署本项目。这个项目是 FastAPI 后端应用，并且要在服务端调用高德 Web Service，所以比纯静态网页更适合部署成 Web Service。
+
+### 推荐方案：Render
+
+仓库已经包含：
+
+- `Dockerfile`：生产环境启动 FastAPI。
+- `render.yaml`：Render Blueprint 配置。
+- `.dockerignore`：避免把 `.env`、缓存和本地数据库打进镜像。
+
+操作步骤：
+
+1. 把代码推到 GitHub。
+2. 打开 Render，选择 `New +` -> `Blueprint`。
+3. 选择这个 GitHub 仓库。
+4. Render 会读取 `render.yaml` 创建 Web Service。
+5. 在 Render 的 Environment 里添加这些密钥：
+
+```env
+OPENAI_API_KEY=你的 OpenAI Key
+AMAP_WEB_SERVICE_KEY=你的高德 Web 服务 Key
+AMAP_JS_API_KEY=你的高德 JS API Key
+AMAP_JS_SECURITY_CODE=你的高德安全密钥
+AMAP_ENABLE_LIVE=true
+ENABLE_DEMO_RENTAL_DATA=false
+ALLOW_PUBLIC_OUTPUT=true
+```
+
+6. 部署完成后，Render 会给出一个公网地址，例如：
+
+```text
+https://shanghai-rental-agent.onrender.com
+```
+
+可访问页面：
+
+- `/agent`：上海租房对话 Agent。
+- `/map`：上海租房地图推荐。
+- `/health`：健康检查。
+
+线上公开演示建议只展示 `/agent` 和 `/map`。当前推荐逻辑默认使用高德搜索上海小区候选，不使用 demo 房源；参考租金是本地固定估算值，通勤路线来自高德。
+
+### Railway 方案
+
+Railway 也可以直接连接 GitHub 仓库部署。选择 Dockerfile 部署后，在 Variables 中填入与 Render 相同的环境变量即可。启动命令不需要手动配置，Dockerfile 会执行：
+
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
+```
+
+### Vercel 说明
+
+Vercel 很适合纯前端网页。这个项目当前是 FastAPI 后端服务，并且有高德路线计算和 OpenAI 调用，部署到 Render/Railway 会更稳定。如果后续要专门做 Vercel 版本，建议把前端拆成独立站点，把 FastAPI 后端部署到 Render/Railway，再由前端调用后端 API。
+
 ## 业务红线
 
 - 公司只服务上海。昆山、苏州、太仓、嘉善、杭州、南通、无锡等外地请求必须拒绝。

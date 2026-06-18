@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 
 from app.api.routes import agent, chat, commute, documents, geo, health, insights, listings, map, marketing, policies, rental, repair
 from app.config import get_settings
@@ -11,6 +11,11 @@ settings = get_settings()
 app = FastAPI(
     title=settings.app_name,
 )
+
+
+@app.get("/", include_in_schema=False)
+def root() -> RedirectResponse:
+    return RedirectResponse(url="/agent")
 
 
 @app.exception_handler(CityGuardError)

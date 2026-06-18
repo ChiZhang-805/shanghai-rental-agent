@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: shanghai-rental-agent
+    env: docker
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_NAME
+        value: shanghai-re-agent
+      - key: AMAP_DEFAULT_CITY
+        value: 上海
+      - key: AMAP_DEFAULT_CITY_CODE
+        value: "021"
+      - key: AMAP_CACHE_TTL_HOURS
+        value: "168"
+      - key: AMAP_LIVE_CALL_CONCURRENCY
+        value: "3"
+      - key: AMAP_ENABLE_LIVE
+        value: "true"
+      - key: ENABLE_DEMO_RENTAL_DATA
+        value: "false"
+      - key: ALLOW_PUBLIC_OUTPUT
+        value: "true"
