@@ -5,7 +5,7 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
-from app.config import Settings, get_settings
+from app.config import Settings, get_effective_settings
 from app.schemas.commute import CommuteMode, CommuteRouteSummary
 from app.schemas.rental import AnchorInput
 from app.services.amap_service import AmapService
@@ -22,7 +22,7 @@ class CommuteService:
         city_guard: CityGuard | None = None,
         settings: Settings | None = None,
     ) -> None:
-        self.settings = settings or get_settings()
+        self.settings = settings or get_effective_settings()
         self.city_guard = city_guard or CityGuard()
         self.amap_service = amap_service or AmapService(self.settings, city_guard=self.city_guard)
         self.cache_service = cache_service or CommuteCacheService(self.settings)

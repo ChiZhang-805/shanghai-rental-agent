@@ -7,7 +7,8 @@ from sqlalchemy.orm import Session
 
 from app.agents.rental_recommendation_agent import RentalRecommendationAgent
 from app.api.deps import get_db
-from app.config import get_settings
+from app.api.key_overrides import request_settings_overrides
+from app.config import get_settings, temporary_settings_override
 from app.schemas.rental import RentalRecommendationRequest, RentalRecommendationResponse
 
 router = APIRouter(tags=["map"])
@@ -17,8 +18,10 @@ router = APIRouter(tags=["map"])
 async def map_rental_recommendations(
     request: RentalRecommendationRequest,
     session: Session = Depends(get_db),
+    key_overrides: dict[str, str] = Depends(request_settings_overrides),
 ) -> RentalRecommendationResponse:
-    return await RentalRecommendationAgent().recommend(request, session=session)
+    with temporary_settings_override(key_overrides):
+        return await RentalRecommendationAgent().recommend(request, session=session)
 
 
 @router.get("/map", response_class=HTMLResponse)

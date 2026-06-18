@@ -1,0 +1,157 @@
+.key-panel {
+  color: #20242c;
+  background: #ffffff;
+  border: 1px solid #d8dee8;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+}
+
+.key-panel summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 12px;
+  color: #0f766e;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  list-style: none;
+}
+
+.key-panel summary::-webkit-details-marker {
+  display: none;
+}
+
+.key-panel summary::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+  border-radius: 4px;
+  border: 2px solid currentColor;
+  box-shadow: inset 0 -5px 0 rgba(15, 118, 110, 0.16);
+}
+
+.key-panel-body {
+  display: grid;
+  gap: 10px;
+  padding: 0 12px 12px;
+}
+
+.key-field {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 550;
+  color: #475569;
+}
+
+.key-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 34px;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.key-control input {
+  width: 100%;
+  min-width: 0;
+  height: 34px;
+  border: 0;
+  outline: 0;
+  padding: 0 10px;
+  color: #111827;
+  background: transparent;
+  font: inherit;
+}
+
+.secret-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  margin: 0;
+  padding: 0;
+  color: #64748b;
+  background: #ffffff;
+  border: 0;
+  border-left: 1px solid #e2e8f0;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.secret-toggle:hover,
+.secret-toggle.is-visible {
+  color: #0f766e;
+  background: #ecfdf5;
+}
+
+.secret-toggle svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.key-save-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 34px;
+  min-height: 34px;
+  margin: 2px 0 0;
+  padding: 0 12px;
+  border: 1px solid #0f766e;
+  border-radius: 7px;
+  color: #ffffff;
+  background: #0f766e;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.key-save-button:hover {
+  background: #0b655f;
+}
+
+.key-status,
+.key-note {
+  min-height: 16px;
+  margin: 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.agent-key-panel {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 60;
+  width: min(420px, calc(100vw - 36px));
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+}
+
+.agent-key-panel:not([open]) {
+  width: auto;
+}
+
+.map-key-panel {
+  margin: 0 0 16px;
+  box-shadow: none;
+}
+
+.map-key-panel .key-panel-body {
+  padding-bottom: 14px;
+}

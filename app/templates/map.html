@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>上海租房地图推荐</title>
     <link rel="stylesheet" href="/static/map.css" />
+    <link rel="stylesheet" href="/static/api_keys.css" />
     <script>
       window._AMapSecurityConfig = { securityJsCode: {{ amap_js_security_code_json }} };
       window.APP_CONFIG = { amapKey: {{ amap_js_api_key_json }} };
@@ -64,6 +65,50 @@
             <svg class="ui-icon"><use href="#icon-chevron-left"></use></svg>
           </button>
         </div>
+        <details id="mapKeyPanel" class="key-panel map-key-panel" open>
+          <summary>API Key 配置</summary>
+          <div class="key-panel-body">
+            <label class="key-field">
+              <span>OpenAI API Key</span>
+              <span class="key-control">
+                <input data-key-field="openaiApiKey" type="password" placeholder="sk-..." />
+                <button class="secret-toggle" type="button" data-key-toggle="openaiApiKey" aria-label="显示 OpenAI API Key">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </span>
+            </label>
+            <label class="key-field">
+              <span>高德 Web 服务 Key</span>
+              <span class="key-control">
+                <input data-key-field="amapWebServiceKey" type="password" placeholder="后端地理编码和路径计算" />
+                <button class="secret-toggle" type="button" data-key-toggle="amapWebServiceKey" aria-label="显示高德 Web 服务 Key">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </span>
+            </label>
+            <label class="key-field">
+              <span>高德 JS API Key</span>
+              <span class="key-control">
+                <input data-key-field="amapJsApiKey" type="password" placeholder="浏览器地图底图" />
+                <button class="secret-toggle" type="button" data-key-toggle="amapJsApiKey" aria-label="显示高德 JS API Key">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </span>
+            </label>
+            <label class="key-field">
+              <span>高德 JS 安全密钥</span>
+              <span class="key-control">
+                <input data-key-field="amapJsSecurityCode" type="password" placeholder="securityJsCode" />
+                <button class="secret-toggle" type="button" data-key-toggle="amapJsSecurityCode" aria-label="显示高德 JS 安全密钥">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </span>
+            </label>
+            <button class="key-save-button" type="button" data-key-save>保存 Key</button>
+            <p class="key-note">仅保存在本机浏览器，请填写自己的 Key。</p>
+            <p class="key-status" data-key-status></p>
+          </div>
+        </details>
         <label><span class="field-label"><svg class="ui-icon"><use href="#icon-pin"></use></svg>工作地点</span><input id="workplace" value="张江高科" autocomplete="off" aria-describedby="workplaceStatus" /></label>
         <div id="workplaceStatus" class="field-hint">输入工作地点 / 高德地图上点击工作地点</div>
         <label><span class="field-label"><svg class="ui-icon"><use href="#icon-wallet"></use></svg>月租预算</span><input id="budget" type="number" value="5500" /></label>
@@ -102,6 +147,7 @@
         <button id="openResults" class="restore-button restore-results" type="button" aria-label="打开结果栏" hidden>候选</button>
       </section>
     </main>
+    <script src="/static/api_keys.js"></script>
     <script src="/static/map.js"></script>
   </body>
 </html>

@@ -19,7 +19,13 @@ const layoutStorageKeys = {
 };
 
 async function initMap() {
-  const key = window.APP_CONFIG && window.APP_CONFIG.amapKey;
+  const config = window.RentAgentKeys
+    ? window.RentAgentKeys.amapClientConfig()
+    : { key: window.APP_CONFIG && window.APP_CONFIG.amapKey, securityCode: "" };
+  const key = config.key;
+  if (config.securityCode) {
+    window._AMapSecurityConfig = { securityJsCode: config.securityCode };
+  }
   if (!key || !window.AMapLoader) {
     document.getElementById("map").textContent = "未配置 AMAP_JS_API_KEY，地图底图不可用；仍可使用推荐列表。";
     setWorkplaceStatus("未配置高德 JS Key 时不可使用地点联想和地图选点；推荐时会用输入文字尝试定位。", true);
@@ -72,7 +78,7 @@ async function recommend() {
   try {
     const res = await fetch("/api/map/rental-recommendations", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: apiRequestHeaders(),
       body: JSON.stringify(collectForm())
     });
     const data = await res.json();
@@ -102,6 +108,13 @@ function clearMap() {
   markers = [];
   markersById = new Map();
   polylines = [];
+}
+
+function apiRequestHeaders() {
+  return {
+    "Content-Type": "application/json",
+    ...(window.RentAgentKeys ? window.RentAgentKeys.headers() : {})
+  };
 }
 
 function clearRoutes() {
@@ -847,6 +860,43 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+function initKeyPanel() {
+  if (window.RentAgentKeys) {
+    window.RentAgentKeys.mountPanel("mapKeyPanel");
+  }
+  window.addEventListener("rent-agent-keys-saved", async () => {
+    await resetMapAfterKeySave();
+  });
+}
+
+async function resetMapAfterKeySave() {
+  const mapElement = document.getElementById("map");
+  mapElement.replaceChildren();
+  mapElement.textContent = "";
+  if (map && typeof map.destroy === "function") {
+    map.destroy();
+  }
+  map = null;
+  AMapApi = null;
+  geocoder = null;
+  placeSearch = null;
+  workMarker = null;
+  markers = [];
+  markersById = new Map();
+  polylines = [];
+  try {
+    await initMap();
+    loadAgentRouteSelection();
+    if (latestResults.length) {
+      renderResultCards(latestResults);
+    }
+    clearStatusMessage();
+  } catch (error) {
+    showStatusMessage("地图初始化失败，请检查高德 JS Key。");
+  }
+}
+
+initKeyPanel();
 document.getElementById("recommend").addEventListener("click", recommend);
 initWorkplaceInput();
 initResizableLayout();

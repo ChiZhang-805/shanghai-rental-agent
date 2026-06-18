@@ -12,6 +12,9 @@ const starters = [
 ];
 
 function init() {
+  if (window.RentAgentKeys) {
+    window.RentAgentKeys.mountPanel("agentKeyPanel");
+  }
   appendMessage("agent", "您好！我是你的智能租房 Agent 小驰！您可以直接描述需求，我会判断您的意图，查询上海房源及对应的区域数据，为您推荐租房信息。");
   renderPlaceholderCards();
   const quick = document.createElement("div");
@@ -29,42 +32,53 @@ function init() {
   messages.appendChild(quick);
 }
 
-form.addEventListener("submit", async event => {
-  event.preventDefault();
-  const text = promptInput.value.trim();
-  if (!text) return;
-  appendMessage("user", text);
-  promptInput.value = "";
-  sendButton.disabled = true;
-  const pending = appendMessage("agent", "正在理解你的需求并查阅上海候选数据...");
-  try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: text })
-    });
-    const data = await response.json();
-    pending.remove();
-    if (!response.ok) {
-      appendMessage("agent", data.detail || "请求失败。");
-      return;
+if (form && promptInput && sendButton) {
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    const text = promptInput.value.trim();
+    if (!text) return;
+    appendMessage("user", text);
+    promptInput.value = "";
+    sendButton.disabled = true;
+    const pending = appendMessage("agent", "正在理解你的需求并查阅上海候选数据...");
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: apiRequestHeaders(),
+        body: JSON.stringify({ message: text })
+      });
+      const data = await response.json();
+      pending.remove();
+      if (!response.ok) {
+        appendMessage("agent", data.detail || "请求失败。");
+        return;
+      }
+      appendMessage("agent", data.answer || "已完成。");
+      renderDetails(data);
+    } catch (error) {
+      pending.remove();
+      appendMessage("agent", "服务暂时不可用，请稍后再试。");
+    } finally {
+      sendButton.disabled = false;
+      promptInput.focus();
     }
-    appendMessage("agent", data.answer || "已完成。");
-    renderDetails(data);
-  } catch (error) {
-    pending.remove();
-    appendMessage("agent", "服务暂时不可用，请稍后再试。");
-  } finally {
-    sendButton.disabled = false;
-    promptInput.focus();
-  }
-});
+  });
+}
 
-promptInput.addEventListener("keydown", event => {
-  if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) {
-    form.requestSubmit();
-  }
-});
+if (promptInput && form) {
+  promptInput.addEventListener("keydown", event => {
+    if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) {
+      form.requestSubmit();
+    }
+  });
+}
+
+function apiRequestHeaders() {
+  return {
+    "Content-Type": "application/json",
+    ...(window.RentAgentKeys ? window.RentAgentKeys.headers() : {})
+  };
+}
 
 function appendMessage(role, text) {
   const item = document.createElement("article");
@@ -239,4 +253,6 @@ function formatModeLabel(mode) {
   return labels[mode] || "通勤";
 }
 
-init();
+if (messages && promptInput) {
+  init();
+}

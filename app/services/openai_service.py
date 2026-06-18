@@ -3,7 +3,7 @@ from typing import Any
 
 from pydantic import BaseModel
 
-from app.config import Settings, get_settings
+from app.config import Settings, get_effective_settings
 
 
 class OpenAIUnavailableError(RuntimeError):
@@ -14,7 +14,7 @@ class OpenAIService:
     """The only place in the app that imports and creates an OpenAI client."""
 
     def __init__(self, settings: Settings | None = None) -> None:
-        self.settings = settings or get_settings()
+        self.settings = settings or get_effective_settings()
         self._client: Any | None = None
 
     @property

@@ -1,3 +1,6 @@
+from collections.abc import Iterator
+from contextlib import contextmanager
+from contextvars import ContextVar
 from functools import lru_cache
 from pathlib import Path
 
@@ -61,3 +64,29 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
+
+
+_request_settings_override: ContextVar[dict[str, str] | None] = ContextVar(
+    "request_settings_override",
+    default=None,
+)
+
+
+def get_effective_settings() -> Settings:
+    settings = get_settings()
+    overrides = _request_settings_override.get()
+    if not overrides:
+        return settings
+    cleaned = {key: value for key, value in overrides.items() if value}
+    if not cleaned:
+        return settings
+    return settings.model_copy(update=cleaned)
+
+
+@contextmanager
+def temporary_settings_override(overrides: object | None) -> Iterator[None]:
+    token = _request_settings_override.set(overrides if isinstance(overrides, dict) else None)
+    try:
+        yield
+    finally:
+        _request_settings_override.reset(token)

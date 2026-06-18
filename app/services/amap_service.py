@@ -4,7 +4,7 @@ from typing import Any
 
 import httpx
 
-from app.config import Settings, get_settings
+from app.config import Settings, get_effective_settings
 from app.schemas.commute import CommuteMode, CommuteRouteSummary
 from app.schemas.geo import GeocodeResponse
 from app.services.city_guard import CityGuard, CityGuardError
@@ -19,7 +19,7 @@ class AmapService:
         http_client: httpx.AsyncClient | None = None,
         city_guard: CityGuard | None = None,
     ) -> None:
-        self.settings = settings or get_settings()
+        self.settings = settings or get_effective_settings()
         self.http_client = http_client
         self.city_guard = city_guard or CityGuard()
 
