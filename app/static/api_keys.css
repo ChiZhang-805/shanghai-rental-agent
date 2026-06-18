@@ -124,8 +124,7 @@
   background: #0b655f;
 }
 
-.key-status,
-.key-note {
+.key-status {
   min-height: 16px;
   margin: 0;
   color: #64748b;
@@ -133,25 +132,44 @@
   line-height: 1.45;
 }
 
+.key-status:empty {
+  display: none;
+}
+
 .agent-key-panel {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 60;
-  width: min(420px, calc(100vw - 36px));
-  max-height: calc(100vh - 120px);
-  overflow: auto;
-}
-
-.agent-key-panel:not([open]) {
-  width: auto;
-}
-
-.map-key-panel {
-  margin: 0 0 16px;
+  width: 100%;
+  flex: 0 0 auto;
   box-shadow: none;
 }
 
+.map-key-panel {
+  margin: 0 0 12px;
+  box-shadow: none;
+}
+
+.map-key-panel summary {
+  min-height: 36px;
+  padding: 0 10px;
+}
+
 .map-key-panel .key-panel-body {
-  padding-bottom: 14px;
+  gap: 7px;
+  padding: 0 10px 10px;
+}
+
+.map-key-panel .key-field {
+  gap: 3px;
+  font-size: 12px;
+}
+
+.map-key-panel .key-control input,
+.map-key-panel .secret-toggle {
+  height: 32px;
+  min-height: 32px;
+}
+
+.map-key-panel .key-save-button {
+  height: 32px;
+  min-height: 32px;
+  margin-top: 0;
 }

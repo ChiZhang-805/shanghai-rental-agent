@@ -7,20 +7,20 @@ body.dragging-sidebar * { cursor: col-resize !important; }
 body.dragging-results * { cursor: row-resize !important; }
 .shell { --sidebar-width: 320px; --results-height: 300px; display: grid; grid-template-columns: var(--sidebar-width) 6px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); width: 100vw; height: 100vh; min-width: 0; min-height: 0; overflow: hidden; }
 .shell.sidebar-collapsed { grid-template-columns: 44px 0 minmax(0, 1fr); }
-.panel { grid-column: 1; grid-row: 1; position: relative; min-width: 0; overflow: auto; padding: 20px; background: #fff; border-right: 1px solid #d8dee8; }
+.panel { grid-column: 1; grid-row: 1; position: relative; min-width: 0; overflow: auto; padding: 18px 20px; background: #fff; border-right: 1px solid #d8dee8; }
 .sidebar-collapsed .panel { overflow: hidden; padding: 0; background: #ffffff; border-right: 1px solid #d8dee8; }
 .sidebar-collapsed .panel > :not(#openSidebar) { display: none; }
-.panel-titlebar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
+.panel-titlebar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
 .panel-titlebar h1 { flex: 0 0 auto; margin: 0; white-space: nowrap; font-size: 20px; line-height: 1.25; }
-label { display: grid; gap: 6px; margin: 12px 0; font-size: 14px; }
+label { display: grid; gap: 5px; margin: 10px 0; font-size: 14px; }
 .field-label { display: inline-flex; align-items: center; gap: 7px; color: #334155; font-weight: 550; }
 .field-label .ui-icon { color: #0f766e; }
 input, select, button { width: 100%; height: 36px; border: 1px solid #cbd5e1; border-radius: 6px; padding: 0 10px; font-size: 14px; background: #fff; }
-button { margin-top: 12px; background: #0f766e; color: #fff; border-color: #0f766e; cursor: pointer; }
+button { margin-top: 10px; background: #0f766e; color: #fff; border-color: #0f766e; cursor: pointer; }
 button:disabled { opacity: 0.65; cursor: default; }
 .button-content, .toolbar-title { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-width: 0; }
 .button-content .ui-icon { width: 15px; height: 15px; flex-basis: 15px; }
-.field-hint { margin: -4px 0 8px; color: #64748b; font-size: 12px; line-height: 1.45; }
+.field-hint { margin: -3px 0 7px; color: #64748b; font-size: 12px; line-height: 1.4; }
 .field-hint-warning { color: #b45309; }
 .icon-button { flex: 0 0 auto; display: inline-grid; place-items: center; width: 32px; height: 32px; margin: 0; padding: 0; color: #334155; background: #ffffff; border: 1px solid #d8dee8; border-radius: 6px; font-size: 18px; line-height: 1; }
 .icon-button .ui-icon { width: 17px; height: 17px; flex-basis: 17px; }
