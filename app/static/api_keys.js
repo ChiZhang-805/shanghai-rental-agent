@@ -88,7 +88,7 @@
           next[input.dataset.keyField] = input.value;
         });
         save(next);
-        setStatus(panel, "已保存在本机浏览器。");
+        setStatus(panel, "");
       });
     }
   }

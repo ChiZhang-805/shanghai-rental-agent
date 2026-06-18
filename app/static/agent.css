@@ -170,7 +170,7 @@ button:disabled {
   gap: 18px;
   min-height: 0;
   height: 100vh;
-  padding: 18px;
+  padding: 18px 18px 8px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-gutter: stable;

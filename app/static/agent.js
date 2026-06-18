@@ -216,7 +216,7 @@ function formatDataSourceLabel(item) {
 function renderPlaceholderCards() {
   const root = document.getElementById("results");
   root.replaceChildren();
-  for (let index = 0; index < 4; index += 1) {
+  for (let index = 0; index < 3; index += 1) {
     const card = document.createElement("article");
     card.className = "result placeholder-card";
     const title = document.createElement("h2");

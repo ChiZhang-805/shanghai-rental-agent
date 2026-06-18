@@ -139,6 +139,7 @@
 .agent-key-panel {
   width: 100%;
   flex: 0 0 auto;
+  margin-top: auto;
   box-shadow: none;
 }
 
